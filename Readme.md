@@ -17,6 +17,13 @@ Call the plugin
 	$('#github-projects').githubprojects({
 		username: 'bjorn-aadnesgaard'
 	});
+## Notes
+
+Github limits anonymous API requests to 60 per hour by IP. When the limit is reached, an error will display with the following markup and error message:
+
+	<div class="alert alert-error">API Rate Limit Exceeded for 0.0.0.0 (User IP)</div>
+
+A future version will eliminate the request limit error by caching results.
 
 ## Rendered HTML Sample with Default Options
 
@@ -116,6 +123,12 @@ The class added to the item element when equalHeight is true.
 _The default value is **equal-height**._
 
 	equalHeightClass: 'equal-height'
+
+## Future
+
++ Add caching to prevent error message on request limit.
++ Improve markup output with custom wrapper tags.
++ Add samples.
 
 ## Thanks
 

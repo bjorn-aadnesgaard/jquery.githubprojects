@@ -10,8 +10,9 @@ $.fn.githubprojects = function (options, callback) {
 		sortBy: 'name',
 		outerClass: 'project-github',
 		itemClass: 'item',
+		itemClassLast: 'item-last',
 		renderIcon: true,
-		iconClass: 'icon', //
+		iconClass: 'icon',
 		renderButton: true,
 		buttonClass: 'btn',
 		descriptionLimit: 100,
@@ -35,16 +36,18 @@ $.fn.githubprojects = function (options, callback) {
 			default:
 				sort(repos, settings.sortBy);
 				var list = $('<div/>').addClass(settings.outerClass);
+				var repoCount = repos.length;
+				var repoCurrent = 1;
 				$(repos).each(function () {
 					if (!this.fork) {
 						var desc = this.description.length > 0 ? this.description.substring(0, settings.descriptionLimit) : settings.descriptionNoText;
-
 						list.append(
-							'<div class="' + settings.itemClass + ((settings.equalHeight) ? " " + settings.equalHeightClass : "") + '">' +
+							'<div class="' + settings.itemClass + ((repoCurrent == repoCount) ? " " + settings.itemClassLast : "") + ((settings.equalHeight) ? " " + settings.equalHeightClass : "") + '">' +
 								'<div class="title">' +
 									'<h4>' +
-										((settings.renderIcon) ? '<i class="' + settings.iconClass + '"></i>' : "") +
-										'<a href="' + this.html_url + '">' + this.name + '</a>' +
+										'<a href="' + this.html_url + '">' +
+											((settings.renderIcon) ? '<i class="' + settings.iconClass + '"></i>' : "") + this.name +
+										'</a>' +
 									'</h4>' +
 								'</div>' +
 								'<div class="description">' +
@@ -53,6 +56,8 @@ $.fn.githubprojects = function (options, callback) {
 								((settings.renderButton) ? '<a href="' + this.html_url + '" class="' + settings.buttonClass + '">View Project</a>': "") +
 							'</div>'
 						);
+
+						repoCurrent++;
 					}
 				});
 
@@ -68,7 +73,7 @@ $.fn.githubprojects = function (options, callback) {
 							maxHeight = $(this).height();
 						}
 					});
-					target.find('.' + settings.equalHeightClass).height(maxHeight);
+					target.find('.' + settings.equalHeightClass).css("min-height", maxHeight);
 
 					if (typeof callback == 'function') { // make sure the callback is a function
 						callback.call(this); // brings the scope to the callback

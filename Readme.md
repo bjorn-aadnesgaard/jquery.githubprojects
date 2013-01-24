@@ -75,6 +75,13 @@ _The default value is **item**._
 
 	itemClass: 'item'
 
+### itemClassLast (string)
+
+The last item element class name.  
+_The default value is **item-last**._
+
+	itemClassLast: 'item-last'
+
 ### renderIcon (boolean)
 
 Renders the icon markup.  

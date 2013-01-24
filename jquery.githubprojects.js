@@ -36,7 +36,7 @@ $.fn.githubprojects = function (options, callback) {
 				var list = $('<div/>').addClass(settings.outerClass);
 				$(repos).each(function () {
 					if (!this.fork) {
-						var desc = this.description.substring(0, settings.maxDescription);
+						var desc = this.description.substring(0, settings.descriptionLimit);
 						list.append(
 							'<div class="' + settings.itemClass + ((settings.equalHeight) ? " " + settings.equalHeightClass : "") + '">' +
 								'<div class="title">' +

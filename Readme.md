@@ -110,6 +110,13 @@ _The default value is **100**._
 	
 	descriptionLimit: 100
 
+### descriptionNoText (string)
+
+Default description text if a project description is empty.   
+_The default value is **No description available**._
+	
+	descriptionNoText : "No description available."
+
 ### equalHeight (boolean)
 
 When true, each item will render with the height value set to that of the item with the greatest value. Set to true for consistent display when used in a column layout.  

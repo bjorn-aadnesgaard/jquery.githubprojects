@@ -15,6 +15,7 @@ $.fn.githubprojects = function (options, callback) {
 		renderButton: true,
 		buttonClass: 'btn',
 		descriptionLimit: 100,
+		descriptionNoText: "No description available.",
 		equalHeight: false,
 		equalHeightClass: 'equal-height'
 	}, options);
@@ -36,7 +37,8 @@ $.fn.githubprojects = function (options, callback) {
 				var list = $('<div/>').addClass(settings.outerClass);
 				$(repos).each(function () {
 					if (!this.fork) {
-						var desc = this.description.substring(0, settings.descriptionLimit);
+						var desc = this.description.length > 0 ? this.description.substring(0, settings.descriptionLimit) : settings.descriptionNoText;
+
 						list.append(
 							'<div class="' + settings.itemClass + ((settings.equalHeight) ? " " + settings.equalHeightClass : "") + '">' +
 								'<div class="title">' +
@@ -46,7 +48,7 @@ $.fn.githubprojects = function (options, callback) {
 									'</h4>' +
 								'</div>' +
 								'<div class="description">' +
-									this.description.substring(0, settings.descriptionLimit) + ((this.description.length > desc.length) ? "..." : "") +
+									desc + ((this.description.length > desc.length) ? "..." : "") +
 								'</div>' +
 								((settings.renderButton) ? '<a href="' + this.html_url + '" class="' + settings.buttonClass + '">View Project</a>': "") +
 							'</div>'
